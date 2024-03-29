@@ -1,0 +1,84 @@
+.projects{
+    background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 2px 5px #ccc;
+  padding: 10px;
+  width: 240px;
+  margin: 16px;
+  max-width: 250px;
+  min-width: 250px;
+  max-height: 500px;
+  min-height: 400px;
+  float: left;
+}
+
+.projects h1 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #004233;
+}
+
+.projects_notes{
+  height: 150px;
+}
+
+
+
+.projects p{
+  
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  
+}
+
+.projects_notes p{
+  font-style: italic;
+  color: #01523f;;
+  
+  
+}
+
+.assigne p{
+  font-size: 1.1em;
+  color: #01523f;;
+}
+
+.date_created{
+  background-color: none;
+  color: #01523f;;
+}
+
+.delete_btn{
+  margin-top: 30px;
+}
+
+.delete_btn button{
+  border: none;
+	outline: none;
+	padding: 10px 0;
+	background-color: #f72d2d;
+	border-radius: 10px;
+	width: 50px;
+	font-weight: bold;
+	font-size: 14px;
+	cursor: pointer;
+  color: white;
+}
+
+.progress{
+  display: flex;
+  align-content: center;
+  padding-top: 12px;
+  justify-content: center;
+  background-color: #33d9b2;
+  height: 50px;
+  border-radius: 10px;
+  margin-top: 5px;
+  
+}
+
+.progress p{
+  color: white;
+}

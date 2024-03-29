@@ -1,0 +1,16 @@
+* {
+   
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: "Rubik";
+    
+}
+
+body {
+    background: #eee;
+    background-image: url("https://www.transparenttextures.com/patterns/checkered-pattern.png");
+    padding: 0 16px;
+  }
+
+  
