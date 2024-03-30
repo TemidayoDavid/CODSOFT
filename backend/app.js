@@ -10,7 +10,7 @@ const port = process.env.PORT || 8080;
 const saltRounds = process.env.SALT_ROUNDS;
 
 app.use(bodyParser.json());
-app.use(express.static("build"));
+// app.use(express.static("build"));
 app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
