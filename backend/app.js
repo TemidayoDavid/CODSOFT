@@ -7,7 +7,7 @@ require('dotenv').config()
 
 const app = express();
 const port = process.env.PORT || 8080;
-const saltRounds = process.env.SALT_ROUNDS;
+const saltRounds = 10;
 
 app.use(bodyParser.json());
 // app.use(express.static("build"));
