@@ -18,7 +18,7 @@ export default function Main() {
   //calling data from login API
   async function approveCredentials(credentials) {
     try {
-      const url = "http://localhost:8080/api/auth/login";
+      const url = "https://codsoft-qpwn.onrender.com/api/auth/login";
       const { data: res } = await axios.post(url, credentials);
       localStorage.setItem("details", res.data);
       setData(JSON.parse(res.data));
@@ -37,7 +37,7 @@ export default function Main() {
   //calling data from REGISTER API
   async function approveRegistration(credentials) {
     try {
-      const url = "http://localhost:8080/api/auth/register";
+      const url = "https://codsoft-qpwn.onrender.com/api/auth/register";
       const { data: res } = await axios.post(url, credentials);
 
       res.data ? (window.location = "/") : (location = "/");
