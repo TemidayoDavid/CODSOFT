@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 require('dotenv').config()
 
 const app = express();
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 const saltRounds = 10;
 
 app.use(bodyParser.json());
@@ -154,6 +154,6 @@ app.post("/api/delete", async (req, res) => {
   //console.log(id);
 });
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`App running on port ${PORT}`);
 });
