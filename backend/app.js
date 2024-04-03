@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { Client } = require("pg");
+const { Pool } = require("pg");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 require('dotenv').config()
@@ -15,21 +15,22 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-const db = new Client({
+const pool = new Pool({
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
   database: process.env.PG_DATABASE,
   password: process.env.PG_PASSWORD,
   port: process.env.PG_PORT,
+  max: 10,
+  connectionTimeoutMillis: 0,
+  idleTimeoutMillis: 0
 });
-
-db.connect();
 
 //Check user and log them in our keep them out
 app.post("/api/auth/login", async (req, res) => {
   try {
     const { password, email } = req.body;
-    const searchCredentials = await db.query(
+    const searchCredentials = await pool.query(
       "SELECT * FROM users WHERE email = $1",
       [email]
     );
@@ -45,7 +46,7 @@ app.post("/api/auth/login", async (req, res) => {
           console.log("Error comparing passwords:", err);
         } else {
           if (result) {
-            const result = await db.query(
+            const result = await pool.query(
               "SELECT * FROM users JOIN project_details ON users.id = user_id WHERE user_id = $1",
               [user_id]
             );
@@ -82,7 +83,7 @@ app.post("/api/auth/login", async (req, res) => {
 // register new users
 app.post("/api/auth/register", async (req, res) => {
   const { name, password, email } = req.body;
-  const result = await db.query("SELECT * FROM users WHERE email = $1", [
+  const result = await pool.query("SELECT * FROM users WHERE email = $1", [
     email,
   ]);
 
@@ -97,14 +98,14 @@ app.post("/api/auth/register", async (req, res) => {
         if (err) {
           console.log("Error trying to hash password:", err);
         } else {
-          const result = await db.query(
+          const result = await pool.query(
             "INSERT INTO users (name, password, email) VALUES ($1, $2, $3) RETURNING *",
             [name, hash, email]
           );
 
           const user_idd = result.rows[0].id;
 
-          await db.query(
+          await pool.query(
             "INSERT INTO project_details (title, note, assigne, due_date, date_created, user_id) VALUES ($1, $2, $3, $4, $5, $6)",
             [
               "Sample title",
@@ -137,7 +138,7 @@ app.post("/api/auth/register", async (req, res) => {
 app.post("/api/add", async (req, res) => {
   //console.log(req.body);
   const { title, note, assigne, due_date, date_created, user_id } = req.body;
-  const result = await db.query(
+  const result = await pool.query(
     "INSERT INTO project_details (title, note, assigne, due_date, date_created, user_id) VALUES ($1, $2, $3, $4, $5, $6)",
     [title, note, assigne, due_date, date_created, user_id]
   );
@@ -148,7 +149,7 @@ app.post("/api/add", async (req, res) => {
 app.post("/api/delete", async (req, res) => {
   //console.log("this should be deleted:" + req.body);
   const id = req.body[0];
-  const result = await db.query("DELETE FROM project_details WHERE id = $1", [
+  const result = await pool.query("DELETE FROM project_details WHERE id = $1", [
     id,
   ]);
   //console.log(id);
