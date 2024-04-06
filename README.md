@@ -1,6 +1,9 @@
 Hello, here is my project management tool internship project with Codsoft.
 
-Though everything is working, i have been having a hard time deployin the project on free hosting site like render. So i plead that a little more time be given to me to figure out a solution.
+I have finally been able to deploy the app!! Yay.
+
+Try it here
+https://codsoft-1-bpbc.onrender.com/
 
 If however you are cloning this project:
 
@@ -12,6 +15,7 @@ npm run start  --- this will start up the react front end.
 
 cd to backend directory and run
 nodemon app.js --- this will start up the server side.
+
 
 
 Thank you
